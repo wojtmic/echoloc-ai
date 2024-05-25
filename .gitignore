@@ -1,2 +1,3 @@
 daemon/.venv
+gui-p/.venv
 .env
