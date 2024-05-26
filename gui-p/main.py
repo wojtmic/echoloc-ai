@@ -103,9 +103,9 @@ def ping_daemon():
 
 def ping_command():
     if ping_daemon():
-        add_message("Daemon is reachable", config["messages"]["info-text"], config["info-color"])
+        add_message("Daemon is reachable", config["messages"]["info-name"], config["info-color"])
     else:
-        add_message("Daemon is not reachable", config["messages"]["info-text"], config["info-color"])
+        add_message("Daemon is not reachable", config["messages"]["info-name"], config["info-color"])
 
 def send_text(message):
     if not pinged:
