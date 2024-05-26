@@ -144,7 +144,7 @@ def button_press():
         return
     # Command system: If message starts with $, treat it as a command and dont send it to the daemon
     if entry.get().startswith("$"):
-        add_message(entry.get(), config["messages"]["command-text"], config["messages"]["command-color"])
+        add_message(entry.get(), config["messages"]["command-name"], config["messages"]["command-color"])
         for cmd in commands:
             if entry.get().split(" ")[0] == f"${cmd.name}":
                 cmd.function()
