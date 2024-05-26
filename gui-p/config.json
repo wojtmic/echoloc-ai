@@ -1,0 +1,18 @@
+{
+    "messages": {
+        "user-color": "gray",
+        "user-name": "You",
+
+        "assistant-color": "DodgerBlue2",
+        "assistant-name": "Oracle",
+
+        "error-color": "red",
+        "error-name": "Error",
+
+        "command-color": "SpringGreen2",
+        "command-name": "Command",
+
+        "info-color": "royal blue",
+        "info-name": "Info"
+    }
+}

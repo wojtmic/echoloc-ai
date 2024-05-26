@@ -1,6 +1,10 @@
 import requests
 import customtkinter as tk
 import argparse
+import json
+
+with open("config.json", "r") as f:
+    config = json.load(f)
 
 class command():
     def __init__(self, name, description, function):
@@ -66,14 +70,14 @@ def reset_conversation():
 
 def reset_command():
     if reset_conversation():
-        add_message("Conversation has been reset", "Reset", "royal blue")
+        add_message("Conversation has been reset", config["messages"]["info-name"], config["messages"]["info-color"])
     else:
-        add_message("Failed to reset the conversation", "Reset", "red")
+        add_message("Failed to reset the conversation", config["messages"]["info-name"], config["messages"]["info-color"])
 
 def stop_daemon():
     url = f"http://{ip}:{port}/stop"
     requests.post(url)
-    add_message("Daemon has been stopped", "Stop", "red")
+    add_message("Daemon has been stopped", config["messages"]["info-name"], config["messages"]["info-color"])
     return True
 
 def ping_daemon():
@@ -99,9 +103,9 @@ def ping_daemon():
 
 def ping_command():
     if ping_daemon():
-        add_message("Daemon is reachable", "Ping", "royal blue")
+        add_message("Daemon is reachable", config["messages"]["info-text"], config["info-color"])
     else:
-        add_message("Daemon is not reachable", "Ping", "red")
+        add_message("Daemon is not reachable", config["messages"]["info-text"], config["info-color"])
 
 def send_text(message):
     if not pinged:
@@ -118,9 +122,9 @@ def send_text(message):
 def send_text_format(message):
     response = send_text(message)
     if "error" in response:
-        add_message(response["error"], "Error", "red")
+        add_message(response["error"], config["messages"]["error-name"], config["messages"]["error-color"])
     else:
-        add_message(response["response"], "Oracle", "DodgerBlue2")
+        add_message(response["response"], config["messages"]["assistant-name"], config["messages"]["assistant-color"])
 
 def add_message(message="none", title="none", color="gray"):
     msg = tk.CTkFrame(chatbox, fg_color=color)
@@ -140,14 +144,14 @@ def button_press():
         return
     # Command system: If message starts with $, treat it as a command and dont send it to the daemon
     if entry.get().startswith("$"):
-        add_message(entry.get(), "Command", "SpringGreen2")
+        add_message(entry.get(), config["messages"]["command-text"], config["messages"]["command-color"])
         for cmd in commands:
             if entry.get().split(" ")[0] == f"${cmd.name}":
                 cmd.function()
                 break
     else:
     # When no command is found, proceed normally
-        add_message(entry.get(), "You")
+        add_message(entry.get(), config["messages"]["user-name"], config["messages"]["user-color"])
         send_text_format(entry.get())
     entry.delete(0, "end")
 
