@@ -2,3 +2,4 @@ daemon/.venv
 gui-p/.venv
 .env
 model
+gui-p/config.json
