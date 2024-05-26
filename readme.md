@@ -28,23 +28,23 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 
 ## Current development roadmap
 - [x] Daemon (Backgroud process for AI processing, written in Python)
-- [/] P-GUI (Version 1 of the UI, made in Python)
-- [_] R-GUI (Version 2 of the UI, made in Rust)
-- [_] Image recognition (Using PolyGemma)
-- [_] Voice recognition (Using TODO)
-- [_] Voice synthesis (Using TODO)
-- [_] Browser extension for a plug 'n' play experience
-- [_] Mobile app for Android and iOS
-- [_] Multiple chats
-- [_] Multiple languages
-- [_] Customizable responses
-- [_] Customizable commands
-- [_] Customizable UI
-- [_] Customizable plugins
-- [_] AI Code execution (Allows assistant to affect Your system with Python code to help you with tasks)
-- [_] File understanding
-- [_] Web browsing & scraping
-- [/] Session saving (Save Your session to continue later)
+- [:construction:] P-GUI (Version 1 of the UI, made in Python)
+- [ ] R-GUI (Version 2 of the UI, made in Rust)
+- [ ] Image recognition (Using PolyGemma)
+- [ ] Voice recognition (Using TODO)
+- [ ] Voice synthesis (Using TODO)
+- [ ] Browser extension for a plug 'n' play experience
+- [ ] Mobile app for Android and iOS
+- [ ] Multiple chats
+- [ ] Multiple languages
+- [ ] Customizable responses
+- [ ] Customizable commands
+- [ ] Customizable UI
+- [ ] Customizable plugins
+- [ ] AI Code execution (Allows assistant to affect Your system with Python code to help you with tasks)
+- [ ] File understanding
+- [ ] Web browsing & scraping
+- [:construction:] Session saving (Save Your session to continue later)
 More features will be added as the they will be needed.
 ### Version: 0.0.1-P, 24.5-0001 (Early Prototype)
 
