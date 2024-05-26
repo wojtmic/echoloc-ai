@@ -4,6 +4,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
+import argparse
+
+parser = argparse.ArgumentParser(description='Run the server with specified options.')
+parser.add_argument('--force-cpu', action='store_true', help='Force the use of CPU even if GPU is available.')
+args = parser.parse_args()
 
 app = FastAPI()
 
@@ -21,8 +26,11 @@ def ping():
     return {"status": "ok"}
 
 class TextGenerator:
-    def __init__(self, model_name="google/gemma-2b-it"):  # You can switch back to 2b-it if your GPU can handle it
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    def __init__(self, model_name="google/gemma-2b-it", force_cpu=False):  # You can switch back to 2b-it if your GPU can handle it
+        if force_cpu:
+            self.device = 'cpu'
+        else:
+            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         try:
             self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_auth_token=hf_token)
             self.model = AutoModelForCausalLM.from_pretrained(model_name, use_auth_token=hf_token).to(self.device)
@@ -40,8 +48,11 @@ class TextGenerator:
         print("Generating text...")
         return self.pipeline(conversation)
 
-
-generator = TextGenerator() # Create the generator instance outside of the endpoints
+if args.force_cpu:
+    print("Forcing CPU usage.")
+    generator = TextGenerator(force_cpu=True) # Create the generator instance outside of the endpoints
+else:
+    generator = TextGenerator()
 
 conversation = Conversation()  # Global conversation object
 
