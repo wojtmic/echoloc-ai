@@ -37,6 +37,7 @@ class TextGenerator:
                 self.pipeline = ConversationalPipeline(model=self.model, tokenizer=self.tokenizer, device=device_int)
 
     def generate_text(self, conversation):
+        print("Generating text...")
         return self.pipeline(conversation)
 
 
@@ -49,17 +50,21 @@ def chat(chat_message: ChatMessage):
     try:
         global conversation
         if isinstance(chat_message, ChatMessage):
-            conversation.add_message(chat_message.message, "user")
-            generated_responses = generator.generate_text([conversation])
-            assistant_message = generated_responses[-1]['generated_text']
-            conversation.add_message(assistant_message, "assistant")
+            print("Received chat message:", chat_message.message)
+            conversation.add_message({"role": "user", "content": chat_message.message})
+            conversation = generator.generate_text(conversation)
+            assistant_message = [msg['content'] for msg in conversation.messages if msg['role'] == 'assistant'][-1]
+            print("Generated assistant message:", assistant_message)
             return {"response": assistant_message}
         else:
+            print("Invalid chat message:", chat_message)
             return {"error": "Invalid chat message."}
     except RuntimeError as e:
         if "CUDA out of memory" in str(e):
+            print("Out of GPU memory.")
             return {"error": "Out of GPU memory. Try a smaller model or use CPU."}
         else:
+            print("An error occurred:", str(e))
             return {"error": f"An error occurred: {str(e)}"}
 
 @app.post("/reset")

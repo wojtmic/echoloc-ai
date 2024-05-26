@@ -16,10 +16,18 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 4. Select Your GUI. This can be changed later.
 5. After launching the GUI, type $start to start the daemon. After its ready, you will receive a notification.
 6. Enjoy! If you have any questions, feel free to ask them on our [Discord server](https://todo.wojtmic.dev/discord).
+### DISCLAIMER: You may experience significant system usage spikes while the daemon is running, especially when generating responses or starting. This is normal. The installer will notify You if Your hardware is not powerful enough to run the daemon. The daemon WILL use at least 3-5GB of RAM at any time and during generation will use as much CPU/GPU as it can.
 
+## Recommended hardware:
+- 4-core CPU
+- 12GB of DDR4 RAM
+- 20GB of SSD storage
+- Modern operating system (Windows 10, macOS 12, Ubuntu 20.04 or any other modern Linux distribution. Will work in newer systems)
+- NVIDIA GPU with CUDA support or Apple M2 or newer chip (for a smooth experience, optional)
+### This is a rough estimate. The daemon will run on less powerful hardware, but it may be slow. For an external installation, instructions can be found [here]("https://todo.wojtmic.dev/adv-install").
 
 ## Current development roadmap
-- [/] Daemon (Backgroud process for AI processing, written in Python)
+- [x] Daemon (Backgroud process for AI processing, written in Python)
 - [/] P-GUI (Version 1 of the UI, made in Python)
 - [_] R-GUI (Version 2 of the UI, made in Rust)
 - [_] Image recognition (Using PolyGemma)
@@ -34,6 +42,9 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 - [_] Customizable UI
 - [_] Customizable plugins
 - [_] AI Code execution (Allows assistant to affect Your system with Python code to help you with tasks)
+- [_] File understanding
+- [_] Web browsing & scraping
+- [/] Session saving (Save Your session to continue later)
 More features will be added as the they will be needed.
 ### Version: 0.0.1-P, 24.5-0001 (Early Prototype)
 
