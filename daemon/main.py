@@ -28,8 +28,25 @@ def ping():
 class TextGenerator:
     def __init__(self, model_name="google/gemma-2b-it", force_cpu=False):  # You can switch back to 2b-it if your GPU can handle it
         torch_name = torch.cuda.get_device_name(0)
+        zluda = False
 
-        
+        if "[ZLUDA]" in torch_name:
+            zluda = True
+            print("Warning: ZLUDA detected. Instability may occur. Find more information at https://todo.wojtmic.dev/zluda.")
+            print("Due to ZLUDA, applying multiple workarounds.")
+            print("If You encounter any issues, add --force-cpu flag to the command line or use $startcpu in the GUI.\n")
+            if torch.backends.cudnn.enabled:
+                print("Disabling cuDNN.")
+                torch.backends.cudnn.enabled = False
+            print("Enabling CUDA flash SDP.")
+            torch.backends.cuda.enable_flash_sdp(True)
+            print("Disabling CUDA math SDP.")
+            torch.backends.cuda.enable_math_sdp(False)
+            print("Disabling CUDA memory efficient SDP.")
+            torch.backends.cuda.enable_mem_efficient_sdp(False)
+
+            print("Most ZLUDA workarounds applied sucessfully.")
+            print("Continuing standard daemon operation. One more workaround ready to apply.\n")
 
         if force_cpu:
             self.device = 'cpu'
@@ -47,27 +64,13 @@ class TextGenerator:
                 self.device = 'cpu'
                 device_int = -1  # Correct device mapping
                 self.pipeline = ConversationalPipeline(model=self.model, tokenizer=self.tokenizer, device=device_int)
-        
-        if "[ZLUDA]" in torch_name:
-            print("Warning: ZLUDA detected. Instability may occur. Find more information at https://todo.wojtmic.dev/zluda.")
-            print("Due to ZLUDA, applying multiple workarounds.")
-            print("If You encounter any issues, add --force-cpu flag to the command line or use $startcpu in the GUI.\n\n")
-            if torch.backends.cudnn.enabled:
-                print("Disabling cuDNN.")
-                torch.backends.cudnn.enabled = False
-            print("Enabling CUDA flash SDP.")
-            torch.backends.cuda.enable_flash_sdp(True)
-            print("Disabling CUDA math SDP.")
-            torch.backends.cuda.enable_math_sdp(False)
-            print("Disabling CUDA memory efficient SDP.")
-            torch.backends.cuda.enable_mem_efficient_sdp(False)
+        if zluda:
+            print("Applying pending ZLUDA workaround.")
             print("Disabling PyTorch cross-attention.")
             for module in self.model.modules():
                 if isinstance(module, torch.nn.MultiheadAttention):
                     module.register_forward_hook(self.zero_out_cross_attention)
-
-            print("ZLUDA workarounds applied sucessfully.")
-            print("Continuing standard daemon operation.\n\n")
+            print("ZLUDA workaround applied successfully.\n")
     
     def zero_out_cross_attention(self, module, input, output):
         output[0] = torch.zeros_like(output[0])  # Zero out the cross-attention output
