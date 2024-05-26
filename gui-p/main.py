@@ -40,20 +40,45 @@ class ping_c(command):
     def __init__(self):
         super().__init__("ping", "Ping the daemon", ping_command)
 
+class reset_c(command):
+    def __init__(self):
+        super().__init__("reset", "Reset the conversation", reset_command)
 
+def reset_conversation():
+    url = f"http://{ip}:{port}/reset"
+    try:
+        response = requests.post(url)
+        response_data = response.json()
+    except:
+        print("Reset command failed")
+        return False
+
+    if response_data.get('status') == 'ok':
+        print("Conversation reset successfully")
+        return True
+    else:
+        print("Reset command failed")
+        return False
+
+def reset_command():
+    if reset_conversation():
+        add_message("Conversation has been reset", "Reset", "royal blue")
+    else:
+        add_message("Failed to reset the conversation", "Reset", "red")
 
 def ping_daemon():
     global pinged
     url = f"http://{ip}:{port}/ping"
 
     try:
-        response = requests.get(url)
+        response = requests.post(url)
+        response_data = response.json()
     except:
         pinged = False
         print("Daemon ping failed")
         return
     
-    if response.status_code == 200:
+    if response_data.get('status') == 'ok':
         pinged = True
         print("Daemon pinged successfully")
         return True
@@ -85,7 +110,7 @@ def send_text_format(message):
     if "error" in response:
         add_message(response["error"], "Error", "red")
     else:
-        add_message(response["message"], "Oracle", "DodgerBlue2")
+        add_message(response["response"], "Oracle", "DodgerBlue2")
 
 def add_message(message="none", title="none", color="gray"):
     msg = tk.CTkFrame(chatbox, fg_color=color)
@@ -98,7 +123,7 @@ def clear_chatbox():
     for widget in chatbox.winfo_children():
         widget.destroy()    
 
-commands = [clear_c(), ping_c()]
+commands = [clear_c(), ping_c(), reset_c()]
 
 def button_press():
     if not entry.get():

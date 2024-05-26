@@ -33,6 +33,7 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 - [_] Customizable commands
 - [_] Customizable UI
 - [_] Customizable plugins
+- [_] AI Code execution (Allows assistant to affect Your system with Python code to help you with tasks)
 More features will be added as the they will be needed.
 ### Version: 0.0.1-P, 24.5-0001 (Early Prototype)
 
@@ -49,3 +50,4 @@ More features will be added as the they will be needed.
 ### 3RD PARTY CONTRIBUTORS
 - right now no one 🥲
 - but feel free to make a pull request!
+*All contributions are greatly appreciated!*
