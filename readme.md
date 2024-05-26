@@ -37,7 +37,6 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 - [ ] Mobile app for Android and iOS
 - [ ] Multiple chats
 - [ ] Multiple languages
-- [ ] Customizable responses
 - [ ] Customizable commands
 - [ ] Customizable UI
 - [ ] Customizable plugins

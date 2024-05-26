@@ -87,7 +87,8 @@ def reset():
 @app.post("/stop")
 def stop():
     print("Stopping daemon, goodbye!")
-    sys.exit(0)
+    sys.exit()
+    return {"status": "ok"}
 
 if __name__ == "__main__":
     import uvicorn
