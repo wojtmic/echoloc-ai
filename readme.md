@@ -25,6 +25,7 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 - Modern operating system (Windows 10, macOS 12, Ubuntu 20.04 or any other modern Linux distribution. Will work in newer systems)
 - NVIDIA GPU with CUDA support or Apple M2 or newer chip (for a smooth experience, optional)
 ### This is a rough estimate. The daemon will run on less powerful hardware, but it may be slow. For an external installation, instructions can be found [here]("https://todo.wojtmic.dev/adv-install").
+### Usage of ZLUDA is possible, but not recommended. More info can be found [here]("https://todo.wojtmic.dev/zluda").
 
 ## Current development roadmap
 - [x] Daemon (Backgroud process for AI processing, written in Python)
