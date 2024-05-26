@@ -69,11 +69,26 @@ class TextGenerator:
             print("Disabling PyTorch cross-attention.")
             for module in self.model.modules():
                 if isinstance(module, torch.nn.MultiheadAttention):
-                    module.register_forward_hook(self.zero_out_cross_attention)
+                    module.register_forward_hook(self.disable_cross_attention)
             print("ZLUDA workaround applied successfully.\n")
     
     def zero_out_cross_attention(self, module, input, output):
         output[0] = torch.zeros_like(output[0])  # Zero out the cross-attention output
+
+    def disable_cross_attention(self, module, input, output):
+        try:
+            output[0] = torch.zeros_like(output[0])  # Zero out the cross-attention output
+        except RuntimeError as e:
+            if "CUDA error: operation not supported" in str(e):
+                print("Warning: Cross-attention operation not supported on this GPU. Using CPU fallback.")
+                self.device = 'cpu'  # Switch to CPU if the operation is not supported
+                # Re-initialize the pipeline on CPU
+                device_int = -1
+                self.pipeline = ConversationalPipeline(model=self.model.to('cpu'), tokenizer=self.tokenizer, device=device_int)
+                # Now, retry generating the output on CPU
+                output[0] = torch.zeros_like(output[0].to('cpu'))  # Zero out on CPU
+            else:
+                raise e  # Raise other RuntimeError
 
     def generate_text(self, conversation):
         print("Generating text...")
