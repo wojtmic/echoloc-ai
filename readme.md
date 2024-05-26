@@ -11,7 +11,7 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 ## How to install
 1. Download the latest installer for your OS from the [releases page](https://todo.wojtmic.dev/download).
 2. Run the installer
-2.1. On Windows, press 'Learn More' and then 'Run anyway'. This is because the installer is not signed as that may cost up to 10,000 USD per month.
+2. 1. On Windows, press 'Learn More' and then 'Run anyway'. This is because the installer is not signed as that may cost up to 10,000 USD per month.
 3. Follow the instructions on the screen
 4. Select Your GUI. This can be changed later.
 5. After launching the GUI, type $start to start the daemon. After its ready, you will receive a notification.
