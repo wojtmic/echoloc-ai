@@ -44,6 +44,10 @@ class reset_c(command):
     def __init__(self):
         super().__init__("reset", "Reset the conversation", reset_command)
 
+class stop_c(command):
+    def __init__(self):
+        super().__init__("stop", "Stop the daemon", stop_daemon)
+
 def reset_conversation():
     url = f"http://{ip}:{port}/reset"
     try:
@@ -65,6 +69,24 @@ def reset_command():
         add_message("Conversation has been reset", "Reset", "royal blue")
     else:
         add_message("Failed to reset the conversation", "Reset", "red")
+
+def stop_daemon():
+    url = f"http://{ip}:{port}/stop"
+    try:
+        response = requests.post(url)
+        response_data = response.json()
+    except:
+        print("Daemon stop failed")
+        add_message("Failed to stop the daemon", "Stop", "red")
+        return False
+
+    if response_data.get('status') == 'ok':
+        print("Daemon stopped successfully")
+        add_message("Daemon has been stopped", "Stop", "royal blue")
+        return True
+    else:
+        print("Daemon stop failed")
+        return False
 
 def ping_daemon():
     global pinged
@@ -123,7 +145,7 @@ def clear_chatbox():
     for widget in chatbox.winfo_children():
         widget.destroy()    
 
-commands = [clear_c(), ping_c(), reset_c()]
+commands = [clear_c(), ping_c(), reset_c(), stop_c()]
 
 def button_press():
     if not entry.get():

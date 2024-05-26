@@ -2,7 +2,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, Conversation, ConversationalPipeline
 from fastapi import FastAPI
 from pydantic import BaseModel
-import os
+import os, sys
 from dotenv import load_dotenv
 import argparse
 
@@ -83,6 +83,11 @@ def reset():
     global conversation
     conversation = Conversation()
     return {"status": "ok"}
+
+@app.post("/stop")
+def stop():
+    print("Stopping daemon, goodbye!")
+    sys.exit(0)
 
 if __name__ == "__main__":
     import uvicorn
