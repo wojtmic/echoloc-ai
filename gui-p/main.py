@@ -72,21 +72,9 @@ def reset_command():
 
 def stop_daemon():
     url = f"http://{ip}:{port}/stop"
-    try:
-        response = requests.post(url)
-        response_data = response.json()
-    except:
-        print("Daemon stop failed")
-        add_message("Failed to stop the daemon", "Stop", "red")
-        return False
-
-    if response_data.get('status') == 'ok':
-        print("Daemon stopped successfully")
-        add_message("Daemon has been stopped", "Stop", "royal blue")
-        return True
-    else:
-        print("Daemon stop failed")
-        return False
+    requests.post(url)
+    add_message("Daemon has been stopped", "Stop", "red")
+    return True
 
 def ping_daemon():
     global pinged
