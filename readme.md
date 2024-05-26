@@ -28,7 +28,7 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 
 ## Current development roadmap
 - [x] Daemon (Backgroud process for AI processing, written in Python)
-- [:construction:] P-GUI (Version 1 of the UI, made in Python)
+- [ ] P-GUI (Version 1 of the UI, made in Python) IN PROGRESS
 - [ ] R-GUI (Version 2 of the UI, made in Rust)
 - [ ] Image recognition (Using PolyGemma)
 - [ ] Voice recognition (Using TODO)
@@ -44,7 +44,7 @@ Welcome to Project Oracle (**CODENAME, NOT FINAL**), destined to be a context-aw
 - [ ] AI Code execution (Allows assistant to affect Your system with Python code to help you with tasks)
 - [ ] File understanding
 - [ ] Web browsing & scraping
-- [:construction:] Session saving (Save Your session to continue later)
+- [ ] Session saving (Save Your session to continue later) IN PROGRESS
 More features will be added as the they will be needed.
 ### Version: 0.0.1-P, 24.5-0001 (Early Prototype)
 
