@@ -31,7 +31,7 @@ Note: On Windows, press 'Learn More' and then 'Run anyway'. This is because the 
 - [x] Daemon (Backgroud process for AI processing, written in Python)
 - [ ] P-GUI (Version 1 of the UI, made in Python) IN PROGRESS
 - [ ] R-GUI (Version 2 of the UI, made in Rust)
-- [ ] Image recognition (Using PolyGemma)
+- [ ] Image recognition (Using PaliGemma)
 - [ ] Voice recognition (Using TODO)
 - [ ] Voice synthesis (Using TODO)
 - [ ] Browser extension for a plug 'n' play experience
