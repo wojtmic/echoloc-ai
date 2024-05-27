@@ -26,7 +26,7 @@ def ping():
     return {"status": "ok"}
 
 class TextGenerator:
-    def __init__(self, model_name="google/gemma-2b-it", force_cpu=False):  # You can switch back to 2b-it if your GPU can handle it
+    def __init__(self, model_name="google/paligemma-3b-pt-224", force_cpu=False):  # You can switch back to 2b-it if your GPU can handle it
         torch_name = torch.cuda.get_device_name(0)
         zluda = False
 
