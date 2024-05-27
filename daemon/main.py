@@ -30,7 +30,7 @@ class TextGenerator:
         torch_name = torch.cuda.get_device_name(0)
         zluda = False
 
-        if "[ZLUDA]" in torch_name:
+        if "[ZLUDA]" in torch_name and not force_cpu:
             zluda = True
             print("Warning: ZLUDA detected. Instability may occur. Find more information at https://echoloc.wojtmic.dev/zluda.")
             print("Due to ZLUDA, applying multiple workarounds.")

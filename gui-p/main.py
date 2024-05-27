@@ -32,7 +32,7 @@ if args.port_override:
 print(f"Using IP address: {ip}:{port}")
 
 root = tk.CTk()
-root.title("Project Oracle - THIS IS A CODENAME, SUBJECT TO CHANGE")
+root.title("Echoloc AI (GUI-P)")
 root.geometry("800x600")
 root.resizable(False, False)
 
