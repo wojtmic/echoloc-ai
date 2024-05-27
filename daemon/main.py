@@ -32,7 +32,7 @@ class TextGenerator:
 
         if "[ZLUDA]" in torch_name:
             zluda = True
-            print("Warning: ZLUDA detected. Instability may occur. Find more information at https://todo.wojtmic.dev/zluda.")
+            print("Warning: ZLUDA detected. Instability may occur. Find more information at https://echoloc.wojtmic.dev/zluda.")
             print("Due to ZLUDA, applying multiple workarounds.")
             print("If You encounter any issues, add --force-cpu flag to the command line or use $startcpu in the GUI.\n")
             if torch.backends.cudnn.enabled:
