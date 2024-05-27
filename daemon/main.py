@@ -1,10 +1,12 @@
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, Conversation, ConversationalPipeline
-from fastapi import FastAPI
+from transformers import AutoTokenizer, AutoModelForCausalLM, Conversation, ConversationalPipeline, ViTFeatureExtractor
+from fastapi import FastAPI, UploadFile, File
 from pydantic import BaseModel
 import os, sys
 from dotenv import load_dotenv
 import argparse
+from PIL import Image
+import requests
 
 parser = argparse.ArgumentParser(description='Run the server with specified options.')
 parser.add_argument('--force-cpu', action='store_true', help='Force the use of CPU even if GPU is available.')
@@ -26,7 +28,7 @@ def ping():
     return {"status": "ok"}
 
 class TextGenerator:
-    def __init__(self, model_name="google/gemma-2b-it", force_cpu=False):  # You can switch back to 2b-it if your GPU can handle it
+    def __init__(self, model_name="liuhaotian/llava-v1.5-7b", force_cpu=False):  # You can switch back to 2b-it if your GPU can handle it
         torch_name = torch.cuda.get_device_name(0)
         zluda = False
 
